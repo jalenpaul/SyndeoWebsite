@@ -1,0 +1,121 @@
+#article_lOSU {
+    background-color: #FFF9C4;
+    min-width: 100%;
+    min-height: 100%;
+    position: absolute;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    -webkit-transition: all .7s ease;
+    -moz-transition: all .2s ease;
+    -ms-transition: all .7s ease;
+    -o-transition: all .7s ease;
+    transition: all .7s ease;
+}
+
+#article_lOSU_invisible {
+    z-index: 1;
+    position: relative;
+}
+
+#div_lOSU_pfp {
+    margin: 0;
+    padding: 0;
+}
+
+#img_lOSU_pfp {
+    border-radius: 50%;
+    width: 175px;
+    height: 175px;
+    max-width: 125px;
+    max-height: 125px;
+    min-width: 125px;
+    min-height: 125px;
+    margin: 10px;
+    color: #BFD7B4;
+    border: 1.5px;
+    border-radius: 50%;
+    border-color: black;
+}
+
+#div_lOSU_PFP {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+}
+
+#section_lOSU_pfp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#div_lOSU_addPFP {
+    display: block;
+    width: 50px;
+    height: 50px;
+    padding: 0px;
+    overflow: hidden;
+    color: white;
+}
+
+#a_lOSU_addPFP {
+    color: white;
+    text-decoration: none;
+}
+
+#b_lOSU_addPFP {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: relative;
+    background-color: #ef9a9a;
+    color: white;
+}
+
+#input_lOSU_addPFP {
+    font-size: 50px;
+    width: 50px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    position: relative;
+    background-color: white;
+    top: -40px;
+    left: -20px;
+}
+
+#b_lOSU_resetPFP {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ef9a9a;
+    text-align: center;
+    padding: 0px;
+    color: white;
+    font-size: x-large;
+}
+
+#input_lOSU_submit {
+    border-radius: 8px;
+    height: 40px;
+    background-color: #ef9a9a;
+    color: white;
+    font-family: "Volkorn";
+}
+
+#b_lOSU_changeForm {
+    color: #F44336;
+    font-size: medium;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+@font-face {
+    /* regular text font */
+    font-family: 'Volkorn';
+    src: url("/Res/Fonts/vollkorn-font/VollkornBlack.ttf");
+}

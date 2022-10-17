@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+h1 {
+    font-family: "magiera";
+    font-size: xx-large;
+    color: #F44336;
+}
+
+form {
+    vertical-align: top;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+label {
+    font-family: "Volkorn";
+}
+
+input {
+    margin-bottom: 10px;
+    outline: 0;
+    box-shadow: none;
+    border: 1.5 solid #F44336;
+    border-radius: 4px;
+    height: 30px;
+    color: black;
+}
+
+@font-face {
+    /* large heading font */
+    font-family: 'magiera';
+    src: url("/Res/Fonts/magiera_script.ttf");
+}
+
+@font-face {
+    /* regular text font */
+    font-family: 'Volkorn';
+    src: url("/Res/Fonts/vollkorn-font/VollkornBlack.ttf");
+}

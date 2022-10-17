@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+
+<head>
+    <link rel="styleSheet" type="text/css" href="/CSS/MainStyles.css">
+    <link rel="styleSheet" type="text/css" href="/CSS/LoginOrSignUpStyles.css">
+    <title>Login or Sign Up</title>
+</head>
+
+<body>
+    <article id="article_lOSU">
+        <h1 id="h1_lOSU"></h1>
+        <div id="div_lOSU_PFP">
+            <img id="img_lOSU_pfp" src="/Res/PNGs/img_syndeo_pfp.png">
+            <section id="section_lOSU_pfp">
+
+                <div id="div_lOSU_addPFP">
+                    <button id="b_lOSU_addPFP"><a id="a_lOSU_addPFP" href="javascript: void(0)">+</a></button>
+                    <input id="input_lOSU_addPFP" onchange="addPFP(this)" type="file" name="upload" accept=".png, .jpg, .jpeg" />
+                </div>
+
+                <button id="b_lOSU_resetPFP" onclick="resetPFP()">⥀</button>
+            </section>
+        </div>
+        <form id="form_lOSU" onsubmit="submit()">
+            <input id="input_lOSU_username" type="text" placeholder="username">
+            <input id="input_lOSU_identifier" type="text">
+            <input id="input_lOSU_password" type="password" placeholder="password">
+            <input id="input_lOSU_submit" onclick="submit()" type="submit">
+        </form>
+        <button id="b_lOSU_changeForm" onclick="changeFormClick()"></button>
+    </article>
+    <script>
+        var AWS = require('aws-sdk');
+
+        var h1 = document.getElementById("h1_lOSU");
+        var imgPFP = document.getElementById("img_lOSU_pfp");
+        var inputFileAddPFP = document.getElementById("input_lOSU_addPFP");
+        var bResetPFP = document.getElementById("b_lOSU_resetPFP");
+
+        var form = document.getElementById("form_lOSU");
+        var inputUsername = document.getElementById("input_lOSU_username");
+        var inputIdentifier = document.getElementById("input_lOSU_identifier");
+        var inputSubmit = document.getElementById("input_lOSU_submit");
+
+        var bChangeForm = document.getElementById("b_lOSU_changeForm");
+
+        var isLoggingIn = false;
+        changeForm(isLoggingIn);
+
+
+        function addPFP(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    imgPFP.src = reader.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function resetPFP() {
+            imgPFP.src = "/Res/PNGs/img_syndeo_pfp.png";
+        }
+
+
+        function submit() {
+            alert("done");
+            return true;
+        }
+
+
+        function changeFormClick() { //switching to login or signup rather than submission
+            if (isLoggingIn) {
+                isLoggingIn = false;
+                changeForm(isLoggingIn);
+            } else {
+                isLoggingIn = true;
+                changeForm(isLoggingIn.val);
+            }
+        }
+
+        function changeForm(isLoggingIn) { //changing layout to login or signup
+            if (isLoggingIn) {
+                h1.textContent = "Login";
+                bAddPFP.style.visibility = 'hidden';
+                bResetPFP.click;
+                bResetPFP.style.visibility = 'hidden';
+                inputUsername.style.visibility = 'hidden';
+                inputIdentifier.placeholder = "userame, email, or phone";
+                bChangeForm.textContent = "Sign Up";
+
+            } else {
+                h1.textContent = "Sign Up"
+                bAddPFP.style.visibility = 'visible';
+                bResetPFP.style.visibility = 'visible';
+                inputUsername.style.visibility = 'visible';
+                inputIdentifier.placeholder = "email";
+                bChangeForm.textContent = "Login";
+            }
+        }
+    </script>
+</body>
+
+</html>

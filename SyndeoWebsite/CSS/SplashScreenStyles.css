@@ -1,0 +1,52 @@
+#article_splash {
+    background-color: #FFF9C4;
+    min-width: 100%;
+    min-height: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#img_splash {
+    width: 300px;
+    height: 300px;
+}
+
+#h1_splash {
+    text-align: center;
+}
+
+.progress-container {
+    position: relative;
+    display: inline-block;
+    background: #ef9a9a;
+    height: 20px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.progress-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 75%;
+    background: #f44336;
+}
+
+#progress_splash {
+    color: #ef9a9a;
+    -webkit-appearance: none;
+    opacity: 0;
+}
+
+#progress_splash::-webkit-progress-bar {
+    background-color: #ef9a9a;
+}
+
+#progress_splash::-moz-progress-bar {
+    background: #ef9a9a;
+}
