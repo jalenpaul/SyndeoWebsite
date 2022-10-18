@@ -34,11 +34,11 @@ input {
 @font-face {
     /* large heading font */
     font-family: 'magiera';
-    src: url("/Res/Fonts/magiera_script.ttf");
+    src: url("/SyndeoWebsite/Res/Fonts/magiera_script.ttf");
 }
 
 @font-face {
     /* regular text font */
     font-family: 'Volkorn';
-    src: url("/Res/Fonts/vollkorn-font/VollkornBlack.ttf");
+    src: url("/SyndeoWebsite/Res/Fonts/vollkorn-font/VollkornBlack.ttf");
 }

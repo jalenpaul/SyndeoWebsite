@@ -1,0 +1,23 @@
+{
+    "name": "syndeowebsite",
+    "version": "1.0.0",
+    "description": "",
+    "main": "SplashScreen.html",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jalenpaul/SyndeoWebsite.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/jalenpaul/SyndeoWebsite/issues"
+    },
+    "homepage": "https://github.com/jalenpaul/SyndeoWebsite#readme",
+    "dependencies": {
+        "firebase": "^9.12.1"
+    }
+}

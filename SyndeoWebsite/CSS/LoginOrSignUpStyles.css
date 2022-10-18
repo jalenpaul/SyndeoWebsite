@@ -28,12 +28,8 @@
 
 #img_lOSU_pfp {
     border-radius: 50%;
-    width: 175px;
-    height: 175px;
-    max-width: 125px;
-    max-height: 125px;
-    min-width: 125px;
-    min-height: 125px;
+    width: 100px;
+    height: 100px;
     margin: 10px;
     color: #BFD7B4;
     border: 1.5px;

@@ -3,8 +3,8 @@
 <html>
 
 <head>
-    <link rel="styleSheet" type="text/css" href="/CSS/MainStyles.css">
-    <link rel="styleSheet" type="text/css" href="/CSS/LoginOrSignUpStyles.css">
+    <link rel="styleSheet" type="text/css" href="/SyndeoWebsite/CSS/MainStyles.css">
+    <link rel="styleSheet" type="text/css" href="/SyndeoWebsite/CSS/LoginOrSignUpStyles.css">
     <title>Login or Sign Up</title>
 </head>
 
@@ -12,7 +12,7 @@
     <article id="article_lOSU">
         <h1 id="h1_lOSU"></h1>
         <div id="div_lOSU_PFP">
-            <img id="img_lOSU_pfp" src="/Res/PNGs/img_syndeo_pfp.png">
+            <img id="img_lOSU_pfp" src="/SyndeoWebsite/Res/PNGs/img_syndeo_pfp.png">
             <section id="section_lOSU_pfp">
 
                 <div id="div_lOSU_addPFP">
@@ -32,7 +32,10 @@
         <button id="b_lOSU_changeForm" onclick="changeFormClick()"></button>
     </article>
     <script>
-        var AWS = require('aws-sdk');
+        import {
+            getAuth,
+            createUserWithEmailAndPassword
+        } from "firebase/auth";
 
         var h1 = document.getElementById("h1_lOSU");
         var imgPFP = document.getElementById("img_lOSU_pfp");
@@ -47,8 +50,6 @@
         var bChangeForm = document.getElementById("b_lOSU_changeForm");
 
         var isLoggingIn = false;
-        changeForm(isLoggingIn);
-
 
         function addPFP(input) {
             if (input.files && input.files[0]) {
@@ -61,7 +62,7 @@
         }
 
         function resetPFP() {
-            imgPFP.src = "/Res/PNGs/img_syndeo_pfp.png";
+            imgPFP.src = "/SyndeoWebsite/Res/PNGs/img_syndeo_pfp.png";
         }
 
 
@@ -80,6 +81,8 @@
                 changeForm(isLoggingIn.val);
             }
         }
+
+        changeForm(isLoggingIn);
 
         function changeForm(isLoggingIn) { //changing layout to login or signup
             if (isLoggingIn) {
@@ -101,6 +104,7 @@
             }
         }
     </script>
+
 </body>
 
 </html>
