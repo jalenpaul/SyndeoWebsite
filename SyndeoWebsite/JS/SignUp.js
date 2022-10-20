@@ -1,21 +1,27 @@
-import { initializeApp } from "/firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "/firebase/auth";
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js';
+import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js';
+import { getStorage, ref, uploadBytes } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-storage.js';
+import '../JS/Models/UserModel';
+
+
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDxlbYh0_dLHI9GKBZNn5WH1CgxS1Rty_U",
-    authDomain: "syndeo-3d845.firebaseapp.com",
-    projectId: "syndeo-3d845",
-    storageBucket: "syndeo-3d845.appspot.com",
-    messagingSenderId: "234917383806",
-    appId: "1:234917383806:web:aef8228f84731a1923522f",
-    measurementId: "G-JY4ZBZEE1Y"
+    apiKey: "AIzaSyCbSKsEVOi2slMZFDlwlFGMmxIl9W3mw40",
+    authDomain: "syndeo-b06fd.firebaseapp.com",
+    projectId: "syndeo-b06fd",
+    storageBucket: "syndeo-b06fd.appspot.com",
+    messagingSenderId: "863731679452",
+    appId: "1:863731679452:web:5d913c3630848a8a197419",
+    measurementId: "G-C9VZ2K3PNG"
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const auth = getAuth(firebaseConfig);
+const storage = getStorage(app);
+
+const userModel = UserModel();
 
 var imgPFP = document.getElementById("img_lOSU_pfp");
-var bAddPFP = document.getElementById("b_lOSU_addPFP");
+var inputAddPFP = document.getElementById("input_lOSU_addPFP");
 var bResetPFP = document.getElementById("b_lOSU_resetPFP");
 
 var inputUsername = document.getElementById("input_lOSU_username");
@@ -24,28 +30,30 @@ var inputPassword = document.getElementById("input_lOSU_password");
 var inputSubmit = document.getElementById("input_lOSU_submit");
 
 
-
-function addPFP(input) {
-    if (input.files && input.files[0]) {
+inputAddPFP.onchange = () => {
+    const selectedFile = inputAddPFP.files[0];
+    if (selectedFile) {
         var reader = new FileReader();
         reader.onload = function(e) {
             imgPFP.src = reader.result;
+            userModel.pfpURL = reader.result;
         }
-        reader.readAsDataURL(input.files[0]);
+        reader.readAsDataURL(selectedFile);
     }
 }
 
 
 
 bResetPFP.onclick = function() {
-    imgPFP.src = "/SyndeoWebsite/Res/PNGs/img_syndeo_pfp.png";
-    alert("Fail");
+    userModel.pfpURL = userModel.getDefaultPFP();
+    imgPFP.src = userModel.getDefaultPFP();
 }
 
 
 
 document.getElementById("form_lOSU").addEventListener('submit', function(event) {
     event.preventDefault();
+
     const username = inputUsername.value.trim();
     const email = inputIdentifier.value.trim();
     const password = inputPassword.value.trim();
@@ -71,25 +79,34 @@ document.getElementById("form_lOSU").addEventListener('submit', function(event) 
     } else {
         createUserWithEmailAndPassword(auth, email, password).then(
             (userCredential) => {
-                alert("finished");
                 const user = userCredential.user;
-                if (user != null) {}
+                if (user != null) {
+                    // inserting pfp to cloud
+                    if (userModel.pfpURL != userModel.getDefaultPFP()) {
+                        const storageRef = ref(getStorage(), 'ProfilePictures/${user.uid}');
+                        uploadBytes(storageRef, userModel.pfpURL).then((snapshot) => {
+                            const imgRef = snapshot.ref;
+                            if (imgRef != null) {
+                                userModel.pfpURL = ref;
+                                //TODO finish sign up with url
+                            } else {
+                                //TODO upload reference lost, retry, (possibly change to promise)
+                            }
+                        });
+                    } else {
+                        //TODO finish sign up without image upload
+                    }
+                }
             }
         ).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            alert(error);
-            console.log(error);
+            alert("Sorry an error ocurred");
+            //TODO send error to server
         });
         return true;
     }
 });
-
-
-
-function changeFormClick() {
-
-}
 
 
 
