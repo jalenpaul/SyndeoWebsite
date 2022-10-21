@@ -1,7 +1,8 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js';
 import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js';
 import { getStorage, ref, uploadBytes } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-storage.js';
-import '../JS/Models/UserModel';
+import { getFirestore, doc, setDoc } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js';
+import { UserModel } from '../JS/Models/UserModel.js';
 
 
 
@@ -17,8 +18,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const storage = getStorage(app);
+const firestore = getFirestore(app);
 
-const userModel = UserModel();
+const userModel = new UserModel(null);
+var reader = new FileReader();
 
 var imgPFP = document.getElementById("img_lOSU_pfp");
 var inputAddPFP = document.getElementById("input_lOSU_addPFP");
@@ -27,19 +30,20 @@ var bResetPFP = document.getElementById("b_lOSU_resetPFP");
 var inputUsername = document.getElementById("input_lOSU_username");
 var inputIdentifier = document.getElementById("input_lOSU_identifier");
 var inputPassword = document.getElementById("input_lOSU_password");
-var inputSubmit = document.getElementById("input_lOSU_submit");
 
 
 inputAddPFP.onchange = () => {
     const selectedFile = inputAddPFP.files[0];
     if (selectedFile) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            imgPFP.src = reader.result;
-            userModel.pfpURL = reader.result;
-        }
         reader.readAsDataURL(selectedFile);
     }
+}
+
+reader.onload = (e) => {
+    imgPFP.src = reader.result;
+    loadXHR(reader.result).then(function(blob) {
+        userModel.pfpURL = blob;
+    })
 }
 
 
@@ -57,6 +61,8 @@ document.getElementById("form_lOSU").addEventListener('submit', function(event) 
     const username = inputUsername.value.trim();
     const email = inputIdentifier.value.trim();
     const password = inputPassword.value.trim();
+
+    userModel.username = username;
 
     if (username.length == 0 ||
         email.length == 0 ||
@@ -77,36 +83,78 @@ document.getElementById("form_lOSU").addEventListener('submit', function(event) 
         return false;
 
     } else {
+        Promise.resolve().then(signUpUser()).then(insertPFP()).then(insertUser());
+        return true;
+    }
+});
+
+
+
+function signUpUser() {
+    return new Promise(function(resolve, reject) {
         createUserWithEmailAndPassword(auth, email, password).then(
             (userCredential) => {
                 const user = userCredential.user;
                 if (user != null) {
-                    // inserting pfp to cloud
-                    if (userModel.pfpURL != userModel.getDefaultPFP()) {
-                        const storageRef = ref(getStorage(), 'ProfilePictures/${user.uid}');
-                        uploadBytes(storageRef, userModel.pfpURL).then((snapshot) => {
-                            const imgRef = snapshot.ref;
-                            if (imgRef != null) {
-                                userModel.pfpURL = ref;
-                                //TODO finish sign up with url
-                            } else {
-                                //TODO upload reference lost, retry, (possibly change to promise)
-                            }
-                        });
-                    } else {
-                        //TODO finish sign up without image upload
-                    }
+                    userModel.userID = user.uid;
+                    resolve();
+                } else {
+                    alert("Sorry, an error ocurred.")
+                    reject();
                 }
             }
         ).catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert("Sorry an error ocurred");
+            alert("Error while signing up.");
+            reject();
             //TODO send error to server
         });
-        return true;
-    }
-});
+    })
+}
+
+
+
+function insertPFP() {
+    return new Promise(function(resolve, reject) {
+        if (userModel.pfpURL != userModel.getDefaultPFP()) {
+            const metaData = {
+                contentType: 'image/jpeg',
+            };
+            const storageRef = ref(storage, 'ProfilePictures/' + userModel.userID + ".jpg");
+            uploadBytes(storageRef, userModel.pfpURL, metaData).then((snapshot) => {
+                const imgRef = snapshot.ref;
+                if (imgRef == null) {
+                    alert("Error while uploadiing profile picture.");
+                    reject();
+                } else {
+                    userModel.pfpURL = String(imgRef);
+                    insertUser();
+                    resolve();
+                }
+            });
+        } else {
+            userModel.pfpURL = "";
+            resolve();
+        }
+    });
+}
+
+
+
+function insertUser() {
+    return new Promise(function(resolve, reject) {
+        setDoc(doc(firestore, "Users", userModel.userID), {
+            userID: userModel.userID,
+            pfpURL: userModel.pfpURL,
+            username: userModel.username,
+        }).then(() => {
+            resolve();
+        }).catch((error) => {
+            alert("Error ocurred while creating profile.");
+            //TODO send error to server
+            reject();
+        });
+    })
+}
 
 
 
@@ -117,3 +165,23 @@ const validateEmail = (email) => {
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         );
 };
+
+
+
+function loadXHR(url) {
+
+    return new Promise(function(resolve, reject) {
+        try {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", url);
+            xhr.responseType = "blob";
+            xhr.onerror = function() { reject("Network error.") };
+            xhr.onload = function() {
+                if (xhr.status === 200) { resolve(xhr.response) } else { reject("Loading error:" + xhr.statusText) }
+            };
+            xhr.send();
+        } catch (err) {
+            alert(err.message);
+        }
+    });
+}
