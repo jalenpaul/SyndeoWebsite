@@ -3,6 +3,7 @@ import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com
 import { getStorage, ref, uploadBytes } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-storage.js';
 import { getFirestore, doc, setDoc } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js';
 import { UserModel } from '../JS/Models/UserModel.js';
+import { validateEmail, loadXHR } from '../JS/Global/GlobalFunctions.js'
 
 
 
@@ -22,6 +23,7 @@ const firestore = getFirestore(app);
 
 const userModel = new UserModel(null);
 var reader = new FileReader();
+var intErrorLevel = 0;
 
 var imgPFP = document.getElementById("img_lOSU_pfp");
 var inputAddPFP = document.getElementById("input_lOSU_addPFP");
@@ -30,6 +32,7 @@ var bResetPFP = document.getElementById("b_lOSU_resetPFP");
 var inputUsername = document.getElementById("input_lOSU_username");
 var inputIdentifier = document.getElementById("input_lOSU_identifier");
 var inputPassword = document.getElementById("input_lOSU_password");
+
 
 
 inputAddPFP.onchange = () => {
@@ -83,59 +86,63 @@ document.getElementById("form_lOSU").addEventListener('submit', function(event) 
         return false;
 
     } else {
-        Promise.resolve().then(signUpUser()).then(insertPFP()).then(insertUser());
+        switch (intErrorLevel) {
+
+            case 3:
+                insertUser();
+                break;
+
+            default:
+                Promise.resolve().then(signUpUser(email, password)).then(insertUser());
+
+        }
         return true;
     }
 });
 
 
 
-function signUpUser() {
+function signUpUser(email, password) {
     return new Promise(function(resolve, reject) {
         createUserWithEmailAndPassword(auth, email, password).then(
             (userCredential) => {
-                const user = userCredential.user;
-                if (user != null) {
-                    userModel.userID = user.uid;
-                    resolve();
+                const userID = userCredential.user.uid;
+                if (userID != null) {
+                    userModel.userID = userID;
+                    if (userModel.pfpURL != userModel.getDefaultPFP()) {
+                        const metaData = {
+                            contentType: 'image/jpeg',
+                        };
+                        const storageRef = ref(storage, 'ProfilePictures/' + userModel.userID + ".jpg");
+                        uploadBytes(storageRef, userModel.pfpURL, metaData).then((snapshot) => {
+                            const imgRef = snapshot.ref;
+                            if (imgRef == null) {
+                                alert("Error while uploadiing profile picture.");
+                                intErrorLevel = 1;
+                                reject();
+                            } else {
+                                userModel.pfpURL = String(imgRef);
+                                insertUser();
+                                resolve();
+                            }
+                        });
+                    } else {
+                        userModel.pfpURL = "";
+                        resolve();
+                    }
                 } else {
-                    alert("Sorry, an error ocurred.")
+                    alert("Sorry, an error ocurred.");
+                    intErrorLevel = 0;
                     reject();
                 }
             }
         ).catch((error) => {
             alert("Error while signing up.");
+            intErrorLevel = 0;
             reject();
             //TODO send error to server
         });
     })
-}
-
-
-
-function insertPFP() {
-    return new Promise(function(resolve, reject) {
-        if (userModel.pfpURL != userModel.getDefaultPFP()) {
-            const metaData = {
-                contentType: 'image/jpeg',
-            };
-            const storageRef = ref(storage, 'ProfilePictures/' + userModel.userID + ".jpg");
-            uploadBytes(storageRef, userModel.pfpURL, metaData).then((snapshot) => {
-                const imgRef = snapshot.ref;
-                if (imgRef == null) {
-                    alert("Error while uploadiing profile picture.");
-                    reject();
-                } else {
-                    userModel.pfpURL = String(imgRef);
-                    insertUser();
-                    resolve();
-                }
-            });
-        } else {
-            userModel.pfpURL = "";
-            resolve();
-        }
-    });
 }
 
 
@@ -147,41 +154,13 @@ function insertUser() {
             pfpURL: userModel.pfpURL,
             username: userModel.username,
         }).then(() => {
+            //TODo send user to Home page
             resolve();
         }).catch((error) => {
             alert("Error ocurred while creating profile.");
             //TODO send error to server
+            intErrorLevel = 3;
             reject();
         });
     })
-}
-
-
-
-const validateEmail = (email) => {
-    return String(email)
-        .toLowerCase()
-        .match(
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        );
-};
-
-
-
-function loadXHR(url) {
-
-    return new Promise(function(resolve, reject) {
-        try {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", url);
-            xhr.responseType = "blob";
-            xhr.onerror = function() { reject("Network error.") };
-            xhr.onload = function() {
-                if (xhr.status === 200) { resolve(xhr.response) } else { reject("Loading error:" + xhr.statusText) }
-            };
-            xhr.send();
-        } catch (err) {
-            alert(err.message);
-        }
-    });
 }
