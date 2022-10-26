@@ -1,31 +1,26 @@
 import { ProfileModel } from '../JS/Models/ProfileModel';
 
+
+const h1Username = document.getElementById('h1_profile_username');
+const imgHeaderDisplay = document.getElementById('img_profile_display');
+const imgPFP = document.getElementById('img_profile_pfp');
+const h2FullName = document.getElementById('h2_profile_realname');
+const pBio = document.getElementById('p_profile_bio');
+const h3LookingFor = document.getElementById('h3_profile_lookingFor');
+
+
 //TODO load profile model
 var profileModel = new ProfileModel(null);
 
 
-const layout = (
-    <div>
-        <header id="header_profile">
-            <h1 id="h1_profile_username">{profileModel.userModel.username}</h1>
-        </header>
-        <article id="article_profile">
-            <section>
-                <img id="img_profile_display" src={profileModel.userModel.pfpURL}/>
-            </section>
+h1Username.ariaValueText = profileModel.userModel.username;
 
-            <section id="section_profile_mainInfo">
-                <p id="p_profile_bio">
-                    <img id="img_profile_pfp" src={profileModel.userModel.pfpURL} />
-                    <h2 id="h2_profile_realName">{profileModel.fullName} {profileModel.pronouns}</h2>
-                    {profileModel.bio}
-                </p>
-                <h3 id="h3_profile_lookingFor">Looking For:</h3>
-            </section>
-        </article>
-    </div>
-);
+imgHeaderDisplay.src = profileModel.headerImgURL;
 
-const domContainer = document.querySelector('#body_profile');
-const root = ReactDOM.createRoot(domContainer);
-root.render(layout);
+imgPFP.src = profileModel.userModel.pfpURL;
+
+h2FullName.ariaValueText = profileModel.fullName;
+
+pBio.ariaValueText = profileModel.bio;
+
+h3LookingFor.ariaValueText = profileModel.arrLookingFor.toString();

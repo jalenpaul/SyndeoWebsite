@@ -3,7 +3,7 @@ import { UserModel } from '../Models/UserModel';
 class ProfileModel {
     constructor(obj) {
         obj = obj != null ? obj : {};
-        this.userModel = UserModel(obj.userModel);
+        this.userModel = new UserModel(obj.userModel);
         this.headerImgURL = obj.headerImgURL != null ? obj.headerImgURL : this.getDefaultHeaderImgURL();
         this.fullName = obj.fullName != null ? obj.fullName : "";
         this.pronouns = obj.pronouns != null ? obj.pronouns : this.getGenderSymbol();
