@@ -10,6 +10,12 @@ h1 {
     color: #F44336;
 }
 
+h2 {
+    font-family: 'Volkorn';
+    font-size: x-large;
+    color: #ef9a9a;
+}
+
 form {
     vertical-align: top;
     display: flex;
@@ -29,6 +35,12 @@ input {
     border-radius: 4px;
     height: 30px;
     color: black;
+}
+
+.LiProfileTraits {
+    border-radius: 25%;
+    background-color: #F44336;
+    color: white;
 }
 
 @font-face {

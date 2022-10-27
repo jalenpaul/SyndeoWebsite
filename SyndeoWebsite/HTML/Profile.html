@@ -22,13 +22,48 @@
             <img id="img_profile_display"/>
         </section>
 
-        <section id="section_profile_mainInfo">
+        <section id="section_profile_mainInfo" class="ProfileSection">
             <p id="p_profile_bio">
                 <img id="img_profile_pfp" />
-                <h2 id="h2_profile_realName"></h2>
+                <div id="div_profile_identity">
+                    <h2 id="h2_profile_realName"></h2>
+                    <button id="b_profile_identity"></button>
+                </div>
+                 
             </p>
-            <h3 id="h3_profile_lookingFor">Looking For:</h3>
+            <div id="div_profile_lookingFor">
+                <h3 id="h3_profile_lookingFor">Looking For:</h3>
+                <label id="label_profile_lookingForContents"></label>
+            </div>
         </section>
+
+        <section id="section_profile_more">
+            <div id="div_profile_subSection" class="ProfileSection">
+                <h3>About Me</h3>
+                <ul id="ul_profile_traits" class=".ProfileAboutMeItems"></ul>
+                <div id="div_profile_addition" class=".ProfileAboutMeItems"></div>
+            </div>
+
+            <div id="div_profile_subSection" class="ProfileSection">
+                <h3>Interact</h3>
+                <button id="b_profile_like" class="RoundedIconButton">
+                    <img src="/SyndeoWebsite/Res/SVGs/like.svg">
+                </button>
+                <button id="b_profile_follow" class="RoundedIconButton">
+                    <img src="/SyndeoWebsite/Res/SVGs/follow.svg">
+                </button>
+                <button id="b_profile_message" class="RoundedIconButton">
+                    <img src="/SyndeoWebsite/Res/SVGs/message.svg">
+                </button>
+                <button id="b_profile_share" class="RoundedIconButton">
+                    <img src="/SyndeoWebsite/Res/SVGs/share.svg">
+                </button>
+                <button id="b_profile_more" class="RoundedIconButton">
+                    <img src="/SyndeoWebsite/Res/SVGs/more.svg">
+                </button>
+            </div>
+        </section>
+
     </article>
     <script text="text/javascript" src="/SyndeoWebsite/JS/Profile.js" type='module'></script>
 </body>
