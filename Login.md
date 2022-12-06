@@ -1,6 +1,6 @@
 layout: page
 title: "Login"
-permalink: https://jalenpaul.github.io/SyndeoWebsite/Login
+permalink: https://jalenpaul.github.io/SyndeoWebsite/SyndeoWebsite/HTML/Login
 
 <!DOCTYPE html>
 <meta charset="UTF-8">
