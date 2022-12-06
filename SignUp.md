@@ -9,7 +9,7 @@ permalink: https://jalenpaul.github.io/SyndeoWebsite/SyndeoWebsite/HTML/SignUp
 <head>
     <link rel="styleSheet" type="text/css" href="/SyndeoWebsite/SyndeoWebsite/CSS/MainStyles.css">
     <link rel="styleSheet" type="text/css" href="/SyndeoWebsite/SyndeoWebsite/CSS/LoginOrSignUpStyles.css">
-    <title>Login or Sign Up</title>
+    <title>Sign Up</title>
 </head>
 
 <body>
