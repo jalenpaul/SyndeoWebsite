@@ -1,1 +1,35 @@
-<h1>Hello<h1>
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+
+<head>
+    <link rel="styleSheet" type="text/css" href="/SyndeoWebsite/CSS/MainStyles.css">
+    <link rel="styleSheet" type="text/css" href="/SyndeoWebsite/CSS/SplashScreenStyles.css">
+    <title>
+        Syndeo
+    </title>
+</head>
+
+<body>
+    <article id="article_splash">
+        <section>
+            <img id="img_splash" src="/SyndeoWebsite/Res/PNGs/img_syndeo_appcover.png">
+        </section>
+        <section>
+            <h1 id="h1_splash">Syndeo</h1>
+            <div class="progress-container">
+                <progress id="progress_splash" max="100"></progress>
+            </div>
+        </section>
+    </article>
+    <script>
+        //TODO login info
+    </script>
+
+    <script type="module">
+        const firebaseConfig = { apiKey: "AIzaSyCbSKsEVOi2slMZFDlwlFGMmxIl9W3mw40", authDomain: "syndeo-b06fd.firebaseapp.com", projectId: "syndeo-b06fd", storageBucket: "syndeo-b06fd.appspot.com", messagingSenderId: "863731679452", appId: "1:863731679452:web:5d913c3630848a8a197419",
+        measurementId: "G-C9VZ2K3PNG" }; // Initialize Firebase const app = initializeApp(firebaseConfig); const analytics = getAnalytics(app);
+    </script>
+</body>
+
+</html>
