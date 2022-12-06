@@ -1,0 +1,30 @@
+layout: page
+title: "Login"
+permalink: https://jalenpaul.github.io/SyndeoWebsite/Login
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+
+<head>
+    <link rel="styleSheet" type="text/css" href="/SyndeoWebsite/SyndeoWebsite/CSS/MainStyles.css">
+    <link rel="styleSheet" type="text/css" href="/SyndeoWebsite/SyndeoWebsite/CSS/LoginOrSignUpStyles.css">
+    <title>Login or Sign Up</title>
+</head>
+
+<body>
+    <article id="article_lOSU">
+        <h1 id="h1_lOSU">Login</h1>
+        <div id="div_lOSU_PFP">
+            <img id="img_lOSU_pfp" src="/SyndeoWebsite/SyndeoWebsite/Res/PNGs/img_syndeo_pfp.png">
+        </div>
+        <form id="form_lOSU">
+            <input id="input_lOSU_identifier" placeholder="email" type="text">
+            <input id="input_lOSU_password" type="password" placeholder="password">
+            <input id="input_lOSU_submit" onclick="submit()" type="submit">
+        </form>
+        <button id="b_lOSU_changeForm">Sign Up</button>
+    </article>
+</body>
+
+</html>
