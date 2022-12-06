@@ -154,7 +154,8 @@ function insertUser() {
             pfpURL: userModel.pfpURL,
             username: userModel.username,
         }).then(() => {
-            //TODo send user to Home page
+            sessionStorage.setItem("userID", userModel.userID);
+            window.open("https://jalenpaul.github.io/SyndeoWebsite/SyndeoWebsite/HTML/CompleteProfile", "_self");
             resolve();
         }).catch((error) => {
             alert("Error ocurred while creating profile.");
