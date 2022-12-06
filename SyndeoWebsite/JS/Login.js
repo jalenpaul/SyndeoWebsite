@@ -35,7 +35,8 @@ form.addEventListener('submit', function(event) {
     } else {
         signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
             const user = userCredential.user;
-            //TODO sign in
+            sessionStorage.setItem("userID", userModel.userID);
+            window.open("https://www.codexworld.com/", "_self");
         }).catch((error) => {
             alert("Sorry, an error ocurred.");
         });
