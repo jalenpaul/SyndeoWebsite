@@ -1,4 +1,10 @@
-import { ProfileModel } from '../JS/Models/ProfileModel.js';
+import { ProfileModel, profileModelConverter } from '../JS/Models/ProfileModel.js';
+import { collection, doc, getDoc } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js';
+
+
+///objects
+const firestore = getFirestore(app);
+var profileUID = sessionStorage.getItem("profileUID");
 
 //main info
 const h1Username = document.getElementById('h1_profile_username');
@@ -20,8 +26,15 @@ const bMessage = document.getElementById('b_profile_message');
 const bShare = document.getElementById('b_profile_share');
 const bMore = document.getElementById('b_profile_more');
 
-//TODO load profile model
+//loading profile model
 var profileModel = new ProfileModel(null);
+const profileRef = doc(firestore, "Users", profileUID).withConverter(profileModelConverter);
+const docSnap = await getDoc(profileRef);
+if (docSnap.exists()) {
+    profileModel = docSnap.data();
+} else {
+    //TODO change to no profile layout
+}
 
 //main info handling
 h1Username.ariaValueText = profileModel.userModel.username;
