@@ -1,0 +1,12 @@
+$primary: #ef9a9a !default;
+$secondary: #FFF9C4 !default;
+$danger: #F44336 !default;
+$theme-colors: ( "primary": $primary, "secondary": $secondary, "danger": $danger, );
+
+$custom-colors: (
+  "custom-color" : #FFF9C4,
+);
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import "../node_modules/bootstrap/scss/bootstrap";
