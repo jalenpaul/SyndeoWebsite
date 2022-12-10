@@ -14,7 +14,7 @@ export class ProfileModel {
 
 
 
-    #getDefaultHeaderImgURL = () => {
+    getDefaultHeaderImgURL = () => {
         return "/SyndeoWebsite/Res/JPGs/waves.jpg";;
     }
 

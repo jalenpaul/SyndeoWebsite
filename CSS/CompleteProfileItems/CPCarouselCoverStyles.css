@@ -1,0 +1,23 @@
+#section_CP_CC_contents {
+    width: max-content;
+    height: max-content;
+    justify-content: space-evenly;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 100px;
+    background-color: #ef9a9a;
+}
+
+#img_CP_CC_display {
+    width: 300px;
+    height: 300px;
+}
+
+
+/* bootstrap */ 
+
+.btn {
+    background-color: #F44336;
+    width: 300px;
+}

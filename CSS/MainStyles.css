@@ -37,11 +37,42 @@ input {
     color: black;
 }
 
+/* bootstrap */
+
+.btn {
+    background-color: #F44336;
+    color: white;
+}
+
+.navbar {
+    background-color: #ef9a9a;
+    height: 65px;
+}
+
+.badge {
+    background-color: #ef9a9a;
+}
+
+.navbar-toggle {
+    background-color: transparent;
+    border: none;
+}
+
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+
+/*custom classes */
+
 .LiProfileTraits {
     border-radius: 25%;
     background-color: #F44336;
     color: white;
 }
+
+
+/* fonts */
 
 @font-face {
     /* large heading font */
