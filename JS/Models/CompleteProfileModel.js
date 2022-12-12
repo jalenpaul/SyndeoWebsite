@@ -1,5 +1,5 @@
 export class CompleteProfileModel {
     constructor() {
-        this.intDisplayProgress =
+        this.intDisplayProgress = 0;
     }
 }
