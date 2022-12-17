@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="styleSheet" type="text/css" href="/CSS/MainStyles.css">
-    <link rel="styleSheet" type="text/css" href="/CSS/CompleteProfile.css">
+    <link rel="styleSheet" type="text/css" href="/CSS/EditProfileStyles.css">
     <title>Edit Profile</title>
 </head>
 
@@ -21,12 +21,31 @@
     </nav>
 
     <!-- Body Contents -->
-    <article>
-        
-        <section class="" id="section_EP_headerImg">
-            <h4>Header Image</h4>
-            <h3>Add a horizontal image that's displayed above your profile that represents you.</h3>
-            <img id="img_EP_header"/>
+    <article id="article_EP">
+
+        <section class="EPItems">
+
+            <h2>Display</h2>
+
+            <div id="div_EP_display_headerImg">
+                <h3>Header Image</h3>
+                <h4>Add a horizontal image that's displayed above your profile that represents you.</h4>
+                <div class="ImgWithOptions">
+                    <img id="img_EP_display_headerImg"/>
+                    <div class="ImgOptions">
+                        <button class="BtnImgOptions" id="b_EP_display_headerImg_addImage">+</button>
+                        <button class="BtnImgOptions" id="b_EP_display_headerImg_resetImage">⥀</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="div_EP_display_PFP">
+                <h3>Header Image</h3>
+                <h4>Add a horizontal image that's displayed above your profile that represents you.</h4>
+                <img id="img_EP_pfpr"/>
+                <button id="b_EP_addImage"></button>
+            </div>
+
         </section>
 
     </article>
