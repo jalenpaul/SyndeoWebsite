@@ -1,4 +1,4 @@
-export class CompleteProfileModel {
+export class EditProfileModel {
     constructor() {
         this.intDisplayProgress = 0;
     }

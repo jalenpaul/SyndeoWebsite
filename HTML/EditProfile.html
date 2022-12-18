@@ -33,7 +33,10 @@
                 <div class="ImgWithOptions">
                     <img id="img_EP_display_headerImg"/>
                     <div class="ImgOptions">
-                        <button class="BtnImgOptions" id="b_EP_display_addHeaderImg">+</button>
+                        <div class="DivAddImg">
+                            <button class="BtnAddImg"><a class="LinkAddImg" href="javascript: void(0)">+</a></button>
+                            <input id="input_EP_display_addHeaderImg" class="InputAddImg" type="file" name="upload" accept=".png, .jpg, .jpeg" />
+                        </div>
                         <button class="BtnImgOptions" id="b_EP_display_resetHeaderImg">⥀</button>
                     </div>
                 </div>
@@ -42,8 +45,16 @@
             <div id="div_EP_display_PFP">
                 <h3>Header Image</h3>
                 <h4>Add a horizontal image that's displayed above your profile that represents you.</h4>
-                <img id="img_EP_display_PFP"/>
-                <button id="b_EP_display_addPFP"></button>
+                <div class="ImgWithOptions">
+                    <img class="PFP" id="img_EP_display_PFP"/>
+                    <div class="ImgOptions">
+                        <div class="DivAddImg">
+                            <button class="BtnAddImg"><a class="LinkAddImg" href="javascript: void(0)">+</a></button>
+                            <input id="input_EP_display_addPFP" class="InputAddImg" type="file" name="upload" accept=".png, .jpg, .jpeg" />
+                        </div>
+                        <button class="BtnImgOptions" id="b_EP_display_resetPFP">⥀</button>
+                    </div>
+                </div>
             </div>
 
         </section>

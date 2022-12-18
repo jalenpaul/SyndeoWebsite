@@ -4,14 +4,18 @@ import { AttachmentQuizModel, AttachmentQuizModelConverter } from './Models/Atta
 import { ProfileModel, getDefaultHeaderImgURL } from './Models/ProfileModel';
 import { getDefaultPFP } from './Models/UserModel';
 
+//firebase
 const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
 
+//User Info
 const userID = sessionStorage.getItem("userID");
 var attachmentQuizModel = AttachmentQuizModel();
 var profileModel = ProfileModel();
-var intCurrentSection = 1;
-var intCurrentSubSection = 1;
+
+//Local items
+var reader = new FileReader();
+var intImgSelector = 0;
 
 const profileDocRef = doc(firestore, "Profile", userID);
 const profileSnap = await getDoc(profileDocRef);
@@ -31,45 +35,34 @@ if (attachmentQuizSnap.exists()) {
 }
 
 
-checkSetupType = () => {
-    if (
-        profileModel.headerImgURL == getDefaultHeaderImgURL() ||
-        profileModel.userModel.pfpURL == getDefaultPFP()
-    ) {
-        setupDisplay();
-    } else {
-        $("#div_EP_OC_displayProgress")
-            .css("width", 100 + "%")
-            .attr("aria-valuenow", 100)
-            .text(100 + "% Complete");
-    }
+
+//loading images
+reader.onload = (e) => {
+    loadXHR(reader.result).then(function(blob) {
+        switch (intImgSelector) {
+            
+            case 1:
+                $('img_EP_display_headerImg').src = reader.result;
+                profileModel.headerImgURL = blob;
+            break;
+
+            case 2:
+        }
+    });
 }
 
 
 
-setupDisplay = () => {
-    const boolHeaderImgCheck = profileModel.headerImgURL == getDefaultHeaderImgURL();
-    const boolPFPCheck = profileModel.userModel.pfpURL == getDefaultPFP();
-    var intProgress = 0;
-
-    if (boolHeaderImgCheck && boolPFPCheck) {
-        loadCarouselCover("");
+/* DISPLAY 
+* loading either the 
+*/
+$('input_EP_display_addHeaderImg').change(() => {
+    const selectedFile = $('input_EP_display_addHeaderImg').files[0];
+    if (selectedFile) {
+        reader.readAsDataURL(selectedFile);
     }
+});
 
-    if (boolPFPCheck) {
 
-    } else {
-        intProgress += 50;
-    }
 
-    if (boolHeaderImgCheck) {
-
-    } else {
-        intProgress += 50;
-    }
-
-    $("#div_EP_OC_displayProgress")
-        .css("width", intProgress + "%")
-        .attr("aria-valuenow", intProgress)
-        .text(intProgress + "% Complete");
-}
+//Functions
