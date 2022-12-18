@@ -96,6 +96,10 @@ input {
     color: white;
 }
 
+.ListItemPadding {
+    padding-bottom: 50px;
+}
+
 
 /* fonts */
 
