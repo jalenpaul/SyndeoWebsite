@@ -51,18 +51,18 @@ export class AttachmentQuizModel {
             "I won't have much of a problem staying in touch with my ex (strictly platonic)--after all, we have a lot in common."
         ];
     }
+
+    AttachmentQuizModelConverter = {
+        toFirestore: (model) => {
+            return {
+                userID: model.userID,
+                arrAnswers: model.arrAnswers,
+            };
+        },
+        fromFirestore: (snapshot, options) => {
+            const data = snapshot.data(options);
+            return new AttachmentQuizModel(data.userID, data.arrAnswers);
+        }
+    };
+
 }
-
-
-const AttachmentQuizModelConverter = {
-    toFirestore: (model) => {
-        return {
-            userID: model.userID,
-            arrAnswers: model.arrAnswers,
-        };
-    },
-    fromFirestore: (snapshot, options) => {
-        const data = snapshot.data(options);
-        return new AttachmentQuizModel(data.userID, data.arrAnswers);
-    }
-};

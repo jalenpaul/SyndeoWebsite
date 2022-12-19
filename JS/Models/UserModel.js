@@ -7,6 +7,6 @@ export class UserModel {
     }
 
     getDefaultPFP() {
-        return "/SyndeoWebsite/Res/PNGs/img_syndeo_pfp.png";
+        return "/Res/PNGs/img_syndeo_pfp.png";
     }
 }

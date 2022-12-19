@@ -1,25 +1,11 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js';
-import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js';
-import { getStorage, ref, uploadBytes } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-storage.js';
-import { getFirestore, doc, setDoc } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js';
+import { auth, storage, firestore } from './Server/FirebaseConfig';
+import { createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js';
+import { ref, uploadBytes } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-storage.js';
+import { doc, setDoc } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js';
 import { UserModel } from '../JS/Models/UserModel.js';
 import { validateEmail, loadXHR } from '../JS/Global/GlobalFunctions.js'
 
 
-
-const firebaseConfig = {
-    apiKey: "AIzaSyCbSKsEVOi2slMZFDlwlFGMmxIl9W3mw40",
-    authDomain: "syndeo-b06fd.firebaseapp.com",
-    projectId: "syndeo-b06fd",
-    storageBucket: "syndeo-b06fd.appspot.com",
-    messagingSenderId: "863731679452",
-    appId: "1:863731679452:web:5d913c3630848a8a197419",
-    measurementId: "G-C9VZ2K3PNG"
-};
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const storage = getStorage(app);
-const firestore = getFirestore(app);
 
 const userModel = new UserModel(null);
 var reader = new FileReader();
@@ -163,5 +149,5 @@ function insertUser() {
             intErrorLevel = 3;
             reject();
         });
-    })
+    });
 }

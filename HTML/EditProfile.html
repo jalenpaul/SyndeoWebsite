@@ -16,15 +16,18 @@
             <button class="navbar-toggle custom-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#div_EP_OC" aria-controls="div_EP_OC">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <button id="b_EP_close" type="button" class="btn-close btn-close-white" data-bs-toggle="modal" data-bs-target="#div_EP_closeModal" aria-label="Close"></button>
+            <div>
+                <input id="input_EP_save" class="InputSubmit" type="submit" value="Save All">
+                <button id="b_EP_close" type="button" class="btn-close btn-close-white" data-bs-toggle="modal" data-bs-target="#div_EP_closeModal" aria-label="Close"></button>
+            </div>
         </div>
     </nav>
 
     <!-- Body Contents -->
     <article id="article_EP">
 
+        <!-- Display -->
         <section class="EPItems">
-
             <h2>Display</h2>
 
             <div class="ListItemPadding" id="div_EP_display_headerImg">
@@ -42,9 +45,9 @@
                 </div>
             </div>
 
-            <div id="div_EP_display_PFP">
-                <h3>Header Image</h3>
-                <h4>Add a horizontal image that's displayed above your profile that represents you.</h4>
+            <div class="ListItemPadding" id="div_EP_display_PFP">
+                <h3>Profile Picture</h3>
+                <h4>Add a picture of you that will be displayed in your profile.</h4>
                 <div class="ImgWithOptions">
                     <img class="PFP" id="img_EP_display_PFP"/>
                     <div class="ImgOptions">
@@ -56,7 +59,34 @@
                     </div>
                 </div>
             </div>
+        </section>
 
+        <!-- Identity -->
+        <section class="EPItems">
+            <h2>Identity</h2>
+
+            <div class="ListItemPadding" id="div_EP_identity_username">
+                <h3>Username</h3>
+                <h4>Give a distinctive name that allows others to find you.</h4>
+                <input id="input_EP_display_username" pattern="[a-zA-Z0-9_\.]{4,15}" type="text" placeholder="username">
+            </div>
+
+            <div class="ListItemPadding" id="div_EP_identity_fullname">
+                <h3>Full Name</h3>
+                <h4>Provide your real name so others know who you are.</h4>
+                <input id="input_EP_display_FullName" pattern="[a-zA-Z]{25}" type="text" placeholder="full name">
+            </div>
+
+            <div class="ListItemPadding" id="div_EP_identity_gender">
+                <h3>Gender & Pronouns</h3>
+                <h4>What is your preferred identity.</h4>
+                <input id="input_EP_display_gender" placeholder="gender and pronouns" pattern="[a-zA-Z]{10}" list="dl_EP_identity_gender">
+                <datalist id="dl_EP_identity_gender">
+                    <option value="he/him">♂ he/him</option>
+                    <option value="she/her">♀ she/her</option>
+                    <option value="they/them">⚩ they/them</option>
+                </datalist>
+            </div>
         </section>
 
     </article>
@@ -85,7 +115,7 @@
                         <div class="fw-bold">Identity</div>
                         Tell us about youreself.
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div id="div_EP_OC_identityProgress" class="progress-bar" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 </li>
@@ -144,7 +174,8 @@
             </div>
         </div>
 
-        <script text="text/javascript" src="/SyndeoWebsite/JS/EditProfile.js" type="module"></script>
+        <script text="text/javascript" src="/JS/EditProfile.js" type="module"></script>
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 

@@ -4,7 +4,7 @@ export class ProfileModel {
     constructor(obj) {
         obj = obj != null ? obj : {};
         this.userModel = new UserModel(obj.userModel);
-        this.headerImgURL = obj.headerImgURL != null ? obj.headerImgURL : this.#getDefaultHeaderImgURL();
+        this.headerImgURL = obj.headerImgURL != null ? obj.headerImgURL : this.getDefaultHeaderImgURL();
         this.fullName = obj.fullName != null ? obj.fullName : "";
         this.pronouns = this.#getIdentitySymbol(obj.genderSymbol);
         this.bio = obj.bio != null ? obj.bio : "";
@@ -15,7 +15,7 @@ export class ProfileModel {
 
 
     getDefaultHeaderImgURL = () => {
-        return "/SyndeoWebsite/Res/JPGs/waves.jpg";;
+        return "/Res/JPGs/waves.jpg";
     }
 
     #getIdentitySymbol = (pronouns) => {
