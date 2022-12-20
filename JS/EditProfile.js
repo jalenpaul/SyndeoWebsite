@@ -66,7 +66,7 @@ reader.onload = (e) => {
 
 
 /* DISPLAY 
-* loading either the 
+* handling 'PFP' and 'headerImgUrl' from ProfileModel
 */
 inputAddHeaderImg.onchange = () => {
     intImgSelector = 1;
@@ -75,7 +75,6 @@ inputAddHeaderImg.onchange = () => {
         reader.readAsDataURL(selectedFile);
     }
 }
-
 
 bResetHeaderImg.onclick = () => {
     imgHeaderImg.src = profileModel.getDefaultHeaderImgURL();
@@ -118,6 +117,21 @@ $('#input_EP_display_gender').change(() => {
 });
 
 
+/* PERSONALITY
+* handling 'bio' and 'traits' of ProfileModel
+*/
+$('#ta_EP_personality_bio').change(() => {
+    profileModel.bio = $('ta_EP_personality_bio').val();
+    loadProgress();
+});
+
+$('#form_EP_personality_traits').submit((event) => {
+    event.preventDefault();
+
+    const 
+});
+
+
 
 //Functions
 function loadInfo() {
@@ -129,6 +143,9 @@ function loadInfo() {
     $('#input_EP_display_username').val(profileModel.userModel.username);
     $('#input_EP_display_FullName').val(profileModel.fullName);
     $('#input_EP_display_gender').val(profileModel.pronouns);
+
+    //personality
+    $('#ta_EP_personality_bio').val(profileModel.bio);
 
     loadProgress();
 }
@@ -158,4 +175,11 @@ function loadProgress() {
         intIdentityTasksCompleted++;
     }
     $('#div_EP_OC_identityProgress').css('width', decimalToPrecent(intIdentityTasksCompleted / 3));
+
+    //personality
+    var intPersonalityTasksCompleted = 0
+    if ($('#ta_EP_personality_bio')[0].checkValidity()) {
+        intPersonalityTasksCompleted++;
+    }
+    $('#div_EP_OC_personalityProgress').css('width', decimalToPrecent(intPersonalityTasksCompleted / 2));
 }

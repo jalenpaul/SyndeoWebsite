@@ -47,6 +47,16 @@ input {
     color: black;
 }
 
+textarea {
+    margin-bottom: 10px;
+    outline: 0;
+    box-shadow: none;
+    border: 1.5 solid #F44336;
+    border-radius: 4px;
+    color: black;
+    resize: none;
+}
+
 /* bootstrap */
 
 .btn {
