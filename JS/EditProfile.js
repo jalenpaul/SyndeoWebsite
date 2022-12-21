@@ -2,8 +2,7 @@ import { firestore, doc, setDoc, getDoc } from './Server/FirebaseConfig.js';
 //import { AttachmentQuizModel, AttachmentQuizModelConverter } from './Models/AttachmentQuizModel.js';
 import { ProfileModel } from './Models/ProfileModel.js';
 import { UserModel } from './Models/UserModel.js';
-import { loadXHR, blobToImage, decimalToPrecent } from './Global/GlobalFunctions.js';
-
+import { loadXHR, blobToImage, decimalToPrecent, arrRemoveItem } from './Global/GlobalFunctions.js';
 
 
 //User Info
@@ -127,8 +126,12 @@ $('#ta_EP_personality_bio').change(() => {
 
 $('#form_EP_personality_traits').submit((event) => {
     event.preventDefault();
-
-    const 
+    if ($('#inputText_EP_personality_traits')[0].checkValidity()) {
+        const strInputTrait = $("#inputText_EP_personality_traits").val();
+        profileModel.arrTraits.push(strInputTrait);
+        $('#inputText_EP_personality_traits').val('');
+        loadInfo();
+    } 
 });
 
 
@@ -146,6 +149,30 @@ function loadInfo() {
 
     //personality
     $('#ta_EP_personality_bio').val(profileModel.bio);
+    let magicGrid = new MagicGrid({
+        container: "#div_EP_personality_traitsMagicGrid",
+        animate: true,
+        static: true,
+        maxColumns: 3,
+        items: profileModel.arrTraits.length,
+    });
+    //magicGrid.listen();
+    profileModel.arrTraits.forEach(element => {
+        var divContainer = document.createElement('div');
+        divContainer.class = 'DivTraits';
+
+        var h5Trait = document.createElement('h5');
+        h5Trait.textContent = element;
+
+        var bTraitRemove = document.createElement('button');
+        bTraitRemove.click = () => {
+            profileModel.arrTraits = arrRemoveItem(profileModel.arrTraits, element);
+            loadInfo();
+        }
+        divContainer.appendChild(h5Trait);
+        divContainer.appendChild(bTraitRemove);
+        $('#div_EP_personality_traitsMagicGrid').append(divContainer);
+    });
 
     loadProgress();
 }
@@ -176,7 +203,7 @@ function loadProgress() {
     }
     $('#div_EP_OC_identityProgress').css('width', decimalToPrecent(intIdentityTasksCompleted / 3));
 
-    //personality
+    //personality progress
     var intPersonalityTasksCompleted = 0
     if ($('#ta_EP_personality_bio')[0].checkValidity()) {
         intPersonalityTasksCompleted++;

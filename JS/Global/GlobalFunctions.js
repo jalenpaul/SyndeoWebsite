@@ -72,4 +72,10 @@ const usernameCheck = (username) => {
 
 
 
-export { loadXHR, blobToImage, decimalToPrecent }
+function arrRemoveItem(arr, item){
+    return arr.filter(f => f !== item);
+}
+
+
+
+export { loadXHR, blobToImage, decimalToPrecent, arrRemoveItem }

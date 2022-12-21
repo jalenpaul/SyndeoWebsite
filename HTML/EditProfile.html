@@ -103,10 +103,10 @@
                 <h3>Traits</h3>
                 <h4>What traits define your personality.</h4>
                 <form id="form_EP_personality_traits">
-                    <input id="inputText_EP_personality_traits" pattern="[a-zA-Z\-]{1,30}" placeholder=" ex. Adventerous">
+                    <input id="inputText_EP_personality_traits" oninvalid="setCustomValidity('Trait must be only letters, no spaces, with a length between 1-30.')" pattern="[a-zA-Z\-]{1,30}" placeholder=" ex. Adventerous">
                     <input id="inputSubmit_EP_personality_traits" class="InputSubmit" type="submit">
                 </form>
-                <li id="li_EP_personality_selectedTraits"></li>
+                <div id="div_EP_personality_traitsMagicGrid"></div>
             </div>
         </section>
 
@@ -175,29 +175,30 @@
         </div>
     </div>
 
-        <!-- Close Modal -->
-        <div id="div_EP_closeModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Exit Without Finishing</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Completing your profile can increase your popularity in the algorithm.
-                </div>
-                <div class="modal-footer">
-                  <a href="https://jalenpaul.github.io/SyndeoWebsite/SyndeoWebsite/HTML/Home">
-                    <button type="button" class="btn" data-bs-dismiss="modal">Yes, Exit</button>
-                  </a>
-                </div>
-              </div>
+    <!-- Close Modal -->
+    <div id="div_EP_closeModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Exit Without Finishing</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Completing your profile can increase your popularity in the algorithm.
+            </div>
+            <div class="modal-footer">
+                <a href="https://jalenpaul.github.io/SyndeoWebsite/SyndeoWebsite/HTML/Home">
+                <button type="button" class="btn" data-bs-dismiss="modal">Yes, Exit</button>
+                </a>
+            </div>
             </div>
         </div>
+    </div>
 
-        <script text="text/javascript" src="/JS/EditProfile.js" type="module"></script>
-        <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script text="text/javascript" src="/JS/EditProfile.js" type="module"></script>
+    <script src="https://unpkg.com/magic-grid/dist/magic-grid.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 
 </html>
