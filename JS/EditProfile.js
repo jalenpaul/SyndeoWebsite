@@ -149,31 +149,35 @@ function loadInfo() {
 
     //personality
     $('#ta_EP_personality_bio').val(profileModel.bio);
-    let magicGrid = new MagicGrid({
-        container: "#div_EP_personality_traitsMagicGrid",
-        animate: true,
-        static: true,
-        maxColumns: 3,
-        items: profileModel.arrTraits.length,
-    });
-    //magicGrid.listen();
+    $("#div_EP_personality_traitsMagicGrid").empty();
+    var ha = [];
     profileModel.arrTraits.forEach(element => {
         var divContainer = document.createElement('div');
-        divContainer.class = 'DivTraits';
+        divContainer.classList.add('DivTraits');
 
         var h5Trait = document.createElement('h5');
         h5Trait.textContent = element;
 
         var bTraitRemove = document.createElement('button');
+        bTraitRemove.classList.add('btn-close');
         bTraitRemove.click = () => {
             profileModel.arrTraits = arrRemoveItem(profileModel.arrTraits, element);
             loadInfo();
         }
         divContainer.appendChild(h5Trait);
         divContainer.appendChild(bTraitRemove);
+        ha.push(divContainer);
         $('#div_EP_personality_traitsMagicGrid').append(divContainer);
+        /*
+        var magicGrid = new MagicGrid({
+            container: "#div_EP_personality_traitsMagicGrid",
+            animate: true,
+            static: false,
+            items: ha.length,
+        });
+        magicGrid.listen();
+        magicGrid.positionItems(); */
     });
-
     loadProgress();
 }
 
