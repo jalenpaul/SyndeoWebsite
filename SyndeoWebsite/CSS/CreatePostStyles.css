@@ -1,0 +1,33 @@
+.CreatePostDisplay {
+    object-fit: scale-down;
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.ButtonCreatePost {
+    max-width: 200px;
+    max-width: 200px;
+    min-width: 200px;
+    min-height: 200px;
+    background-color: white;
+    border: 1.5px;
+    border-radius: 8px;
+    border-color: black;
+    padding: 10px;
+    margin: 10px;
+    -webkit-box-shadow: 0 0 4px 0 #00000014, 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+    -moz-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+#article_CP {
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: whitesmoke;
+}
