@@ -1,7 +1,7 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js';
-import { getAuth } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js';
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js';
 import { getStorage } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-storage.js';
-import { getFirestore, collection, where, getDocs, getDoc, setDoc, doc, query } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js';
+import { getFirestore, collection, where, getDocs, getDoc, setDoc, doc, query, getDocFromCache, } from 'https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js';
 
 
 const firebaseConfig = {
@@ -18,4 +18,22 @@ const auth = getAuth(app);
 const storage = getStorage(app);
 const firestore = getFirestore(app);
 
-export { auth, storage, firestore, collection, where, getDocs, getDoc, setDoc, doc, query }
+function authenticateAccountStatus() {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          sessionStorage.setItem("User", user);
+          // ...
+        } else {
+          // User is signed out
+          // ...
+        }
+    });
+}
+
+export { auth, onAuthStateChanged, 
+    storage, 
+    firestore, collection, where, getDocs, getDoc, setDoc, doc, query, getDocFromCache,
+    authenticateAccountStatus
+}

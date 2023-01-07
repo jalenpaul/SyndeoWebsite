@@ -8,8 +8,11 @@ export class ProfileModel {
         this.fullName = obj.fullName != null ? obj.fullName : "";
         this.pronouns = this.#getIdentitySymbol(obj.genderSymbol);
         this.bio = obj.bio != null ? obj.bio : "";
-        this.arrLookingFor = obj.arrLookingFor != null ? obj.arrLookingFor : [];
+        this.lookingFor = obj.lookingFor != null ? obj.lookingFor : "";
         this.arrTraits = obj.arrTraits != null ? obj.arrTraits : [];
+        this.attachmentStyle = obj.attachmentStyle != null ? obj.attachmentStyle : "";
+        this.strOtherSectionType = obj.strOtherSectionType != null ? obj.strOtherSectionType : "";
+        this.objOtherSectionData = obj.objOtherSectionData;
     }
 
 

@@ -1,3 +1,5 @@
+import { PromptModel } from '../Models/ProfileOtherSection/PromptModel.js';
+import { doc, getDoc } from '../Server/FirebaseConfig.js';
 import { firestore, collection, query, where, getDocs } from '/JS/Server/FirebaseConfig.js';
 
 const validateEmail = (email) => {
@@ -78,4 +80,36 @@ function arrRemoveItem(arr, item){
 
 
 
-export { loadXHR, blobToImage, decimalToPrecent, arrRemoveItem }
+async function getProfileOtherSectionData(userID, strOtherSectionType) {
+    switch (strOtherSectionType) {
+
+        case 'Prompt':
+            const promptDocRef = doc(firestore, "Prompts", userID);
+            return await getDoc(promptDocRef);
+
+        case 'Mantra':
+            const mantraDocRef = doc(firestore, 'Mantras', userID);
+            return await getDoc(mantraDocRef);
+
+        case 'Pinned Post':
+            const pinnedPostDocRef = doc(firestore, 'Pinned Posts', userID);
+            return await getDoc(pinnedPostDocRef);
+
+        default:
+            return 'Sorry an error ocurred.';
+    }
+}
+
+
+
+function addOptionsListToSelect(selectElement, arrStrItems) {
+    arrStrItems.forEach(i => {
+        var item = document.createElement('option');
+        item.text = i;
+        selectElement.options.add(item);
+    });
+}
+
+
+
+export { validateEmail, loadXHR, blobToImage, decimalToPrecent, arrRemoveItem, getProfileOtherSectionData, addOptionsListToSelect }

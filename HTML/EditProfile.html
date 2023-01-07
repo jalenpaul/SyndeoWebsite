@@ -68,7 +68,7 @@
             <div class="ListItemPadding" id="div_EP_identity_username">
                 <h3>Username</h3>
                 <h4>Give a distinctive name that allows others to find you.</h4>
-                <input id="input_EP_display_username" required pattern="^[a-zA-Z0-9_\.]{4,15}" type="text" placeholder="username">
+                <input id="input_EP_display_username" required pattern="^[a-zA-Z0-9_\.]{4,25}" type="text" placeholder="username">
             </div>
 
             <div class="ListItemPadding" id="div_EP_identity_fullname">
@@ -80,7 +80,7 @@
             <div class="ListItemPadding" id="div_EP_identity_gender">
                 <h3>Gender & Pronouns</h3>
                 <h4>What is your preferred identity.</h4>
-                <input id="input_EP_display_gender" placeholder="gender and pronouns" pattern="[a-zA-Z]{0,10}" list="dl_EP_identity_gender">
+                <input id="input_EP_display_gender" placeholder="gender and pronouns" pattern="[a-zA-Z\/]{0,10}" list="dl_EP_identity_gender">
                 <datalist id="dl_EP_identity_gender">
                     <option value="he/him">♂ he/him</option>
                     <option value="she/her">♀ she/her</option>
@@ -96,7 +96,7 @@
             <div class="ListItemPadding" id="div_EP_personality_bio">
                 <h3>Bio</h3>
                 <h4>Describe who you are, what makes you unique.</h4>
-                <textarea id="ta_EP_personality_bio" cols="100" rows="5" maxlength="500" placeholder="I love long walks on the beach..."></textarea>
+                <textarea id="ta_EP_personality_bio" cols="100" rows="5" maxlength="500" placeholder="I love long walks on the beach..." style="border: 1.5px solid black;"></textarea>
             </div>
 
             <div class="ListItemPadding" id="div_EP_personality_traits">
@@ -106,10 +106,56 @@
                     <input id="inputText_EP_personality_traits" oninvalid="setCustomValidity('Trait must be only letters, no spaces, with a length between 1-25.')" pattern="[a-zA-Z\-]{1,25}" placeholder=" ex. Adventerous" oninput="setCustomValidity('')">
                     <input id="inputSubmit_EP_personality_traits" class="InputSubmit" type="submit">
                 </form>
-                <div id="div_EP_personality_traitsMagicGrid" class="grid" data-masonry='{"itemSelector": ".grid-item"}'></div>
+                <div id="div_EP_personality_gridBackground">
+                    <div id="div_EP_personality_masonryGrid" class="grid"></div>
+                </div>
             </div>
         </section>
 
+        <!-- Your Match -->
+        <section class="EPItems">
+            <h2>Your Match</h2>
+            
+            <div class="ListItemPadding" id="div_EP_yourMatch_lookingFor">
+                <h3>Looking For</h3>
+                <h4>What type of relationship are you looking for.</h4>
+                <input id="input_EP_yourMatch_lookingFor" placeholder="Networking" pattern="[a-zA-Z]{0,25}" list="dl_EP_yourMatch_lookingFor">
+                <datalist id="dl_EP_yourMatch_lookingFor">
+                    <option value="none">none</option>
+                    <option value="Serious Relationship">Serious Relationship</option>
+                    <option value="Hookup">Hookup</option>
+                    <option value="Friends With Benefits">Friends With Benefits</option>
+                    <option value="Friendship">Friendship</option>
+                    <option value="Networking">Networking</option>
+                </datalist>
+            </div>
+
+            <div class="ListItemPadding" id="div_EP_yourMatch_attachment">
+                <h3>Attachment Style</h3>
+                <h4>Find out your attachment style to match you with like-minded individuals.</h4>
+                <div id="div_EP_yourMatch_attachmentInput">
+                    <input id="input_EP_yourMatch_attachment" placeholder="start the quiz to find out" readonly>
+                    <button id="b_EP_yourMatch_attachment" class="InputSubmit">Start Quiz</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Truly Me -->
+        <section class="EPItems">
+            <h2>Truly Me</h2>
+
+            <div class="ListItemPadding" id="div_EP_trulyMe_other">
+                <h3>Other Section</h3>
+                <h4>Add an additional element to your profile.</h4>
+                <select id="select_EP_trulyMe_other" class="form-select" aria-label="Default select example">
+                    <option value="None" selected>None</option>
+                    <option value="Prompt">Prompt</option>
+                    <option value="Mantra">Mantra</option>
+                    <option value="Pinned Post">Pinned Post</option>
+                </select>
+                <div id="div_EP_trulyMe_otherContainer"></div>
+            </div>
+        </section>
     </article>
 
     <!-- Off Canvas -->
@@ -156,7 +202,7 @@
                         <div class="fw-bold">Your Match</div>
                         Let's find the right match for you.
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div id="div_EP_OC_yourMatchProgress" class="progress-bar" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 </li>
@@ -196,7 +242,6 @@
     </div>
 
     <script text="text/javascript" src="/JS/EditProfile.js" type="module"></script>
-    <script src="https://unpkg.com/magic-grid/dist/magic-grid.min.js"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
